@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhishek - Creative Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfdfd;
+            color: #111827;
+        }
+        .font-handwriting {
+            font-family: 'Gochi Hand', cursive;
+        }
+        .sticky-note {
+            padding: 1.5rem;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+        .sticky-note:hover {
+            transform: scale(1.05) rotate(1deg);
+        }
+        .yellow-note { background-color: #fffbe9; transform: rotate(-2deg); }
+        .blue-note { background-color: #eff6ff; transform: rotate(1deg); }
+        .pink-note { background-color: #fdf2f8; transform: rotate(2deg); }
+        
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section-heading .icon {
+            width: 32px;
+            height: 32px;
+        }
+        .project-card {
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        .project-card:hover {
+            border-color: #4f46e5;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transform: translateY(-4px);
+        }
+        .form-input {
+            background-color: #f3f4f6;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #4f46e5;
+            outline: none;
+        }
+        .timeline-item::before {
+            content: attr(data-index);
+            position: absolute;
+            left: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+        }
+        .timeline-item-1::before { background-color: #60a5fa; }
+        .timeline-item-2::before { background-color: #f87171; }
+        .ai-button {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .ai-button:hover {
+            transform: scale(1.2) rotate(15deg);
+        }
+        .loader {
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid #4f46e5;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .skill-tag {
+            background-color: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            color: #4b5563;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .skill-tag:hover {
+            background-color: #eef2ff;
+            border-color: #c7d2fe;
+            color: #4f46e5;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-16">
+            <div class="flex items-center space-x-3">
+                <img src="./profile22.jpg" alt="logo" class="rounded-full" style="width: 150px; height: 100px; object-fit: cover; background-color: #f3f4f6; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.367);">
+                <span class="font-bold text-xl">Abhishek</span>
+            </div>
+            <nav class="flex items-center space-x-4 text-sm font-medium">
+                <a href="#projects" class="hover:text-indigo-600">Portfolio</a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=abhishekkumar84849@gmail.com" target="_blank" rel="noopener noreferrer" class="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-800">Hire Me</a>
+            </nav>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-12 gap-y-16">
+            <!-- Left Column -->
+            <aside class="md:col-span-4 space-y-12">
+                <section>
+                    <h1 class="text-4xl font-bold mb-4 leading-tight">I design & build top notch websites</h1>
+                    <p class="text-gray-600">Let's design your website and will develop to bring your vision to life using code.</p>
+                </section>
+
+                <section>
+                    <div class="section-heading mb-6">
+                        <img src="https://img.icons8.com/ios/50/000000/questions.png" alt="What I do icon" class="icon"/>
+                        <h2 class="font-handwriting text-2xl">What I do?</h2>
+                        <button id="what-i-do-ai-btn" class="ai-button text-indigo-500" title="✨ Rewrite with AI">
+                            <i data-lucide="sparkles" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <div id="what-i-do-container" class="grid grid-cols-1 gap-8">
+                        <div class="sticky-note yellow-note">
+                            <h3 class="font-bold text-lg mb-1">Web Development</h3>
+                            <p class="text-sm text-gray-600">Building responsive and performant websites from scratch using modern technologies.</p>
+                        </div>
+                        <div class="sticky-note blue-note">
+                            <h3 class="font-bold text-lg mb-1">UI & Product Design</h3>
+                            <p class="text-sm text-gray-600">Designing intuitive and user-friendly interfaces that are both beautiful and functional.</p>
+                        </div>
+                         <div class="sticky-note pink-note">
+                            <h3 class="font-bold text-lg mb-1">Full-Stack Solutions</h3>
+                            <p class="text-sm text-gray-600">Developing end-to-end applications, including database management and server-side logic.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <div class="section-heading mb-4">
+                        <img src="https://img.icons8.com/ios/50/000000/contact-card.png" alt="contact icon" class="icon"/>
+                        <h2 class="font-handwriting text-2xl">Contact here</h2>
+                    </div>
+                    <p class="text-gray-600">Have a project idea? Just say me Hi.</p>
+                </section>
+            </aside>
+
+            <!-- Right Column -->
+            <main class="md:col-span-8">
+                <section id="projects" class="mb-16">
+                     <div class="section-heading mb-4">
+                        <img src="https://img.icons8.com/ios/50/000000/project.png" alt="project icon" class="icon"/>
+                        <h2 class="font-handwriting text-2xl">Featured Projects</h2>
+                    </div>
+                    <p class="text-gray-600 mb-6">Have designed more than 10 projects.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <a href="#" class="project-card block rounded-lg p-4">
+                            <img src="https://placehold.co/600x400/fffbe9/854d0e?text=Library+System" alt="Digital Library System Project Image" class="rounded-md mb-4 w-full h-40 object-cover">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h3 class="font-semibold">Digital Library System</h3>
+                                    <p class="text-sm text-gray-500">Java, MySQL</p>
+                                </div>
+                                <span class="bg-pink-100 text-pink-700 text-xs px-3 py-1 rounded-full">Desktop App</span>
+                            </div>
+                        </a>
+                        <a href="#" class="project-card block rounded-lg p-4">
+                            <img src="https://placehold.co/600x400/eff6ff/1d4ed8?text=Housing+Prediction" alt="Housing Price Prediction Project Image" class="rounded-md mb-4 w-full h-40 object-cover">
+                             <div class="flex justify-between items-center">
+                                <div>
+                                    <h3 class="font-semibold">Housing Price Prediction</h3>
+                                    <p class="text-sm text-gray-500">Python, Flask</p>
+                                </div>
+                                <span class="bg-blue-100 text-blue-700 text-xs px-3 py-1 rounded-full">ML Project</span>
+                            </div>
+                        </a>
+                        <a href="#" class="project-card block rounded-lg p-4">
+                            <img src="https://placehold.co/600x400/f0fdf4/16a34a?text=Result+System" alt="Student Result System Project Image" class="rounded-md mb-4 w-full h-40 object-cover">
+                             <div class="flex justify-between items-center">
+                                <div>
+                                    <h3 class="font-semibold">Student Result System</h3>
+                                    <p class="text-sm text-gray-500">PHP, MySQL</p>
+                                </div>
+                                <span class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full">Web App</span>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+
+                <section id="experience" class="mb-16">
+                    <div class="section-heading mb-4">
+                        <img src="https://img.icons8.com/ios/50/000000/timeline.png" alt="work experience icon" class="icon"/>
+                        <h2 class="font-handwriting text-2xl">Work Experience</h2>
+                    </div>
+                    <p class="text-gray-600 mb-8">Have been developing since my past 2 posts.</p>
+                    <div class="border-l-2 border-gray-200 pl-10 space-y-8">
+                        <div class="timeline-item relative timeline-item-1" data-index="1">
+                            <h3 class="font-semibold">Intern @ Kapil Automotives</h3>
+                            <p class="text-sm text-gray-500">IT Infrastructure & Systems | May 2025 - Present</p>
+                        </div>
+                        <div class="timeline-item relative timeline-item-2" data-index="2">
+                            <h3 class="font-semibold">Web Development Intern @ Codetech</h3>
+                            <p class="text-sm text-gray-500">React.js Development | Certification Period</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="skills" class="mb-16">
+                    <h2 class="text-2xl font-bold mb-1">My <span class="text-indigo-600">Toolkit</span></h2>
+                    <div class="flex flex-wrap gap-3 mt-4">
+                        <div class="skill-tag">Java</div>
+                        <div class="skill-tag">JavaScript</div>
+                        <div class="skill-tag">React.js</div>
+                        <div class="skill-tag">Node.js</div>
+                        <div class="skill-tag">MySQL</div>
+                        <div class="skill-tag">MongoDB</div>
+                        <div class="skill-tag">Git & GitHub</div>
+                        <div class="skill-tag">HTML & CSS</div>
+                        <div class="skill-tag">Tailwind CSS</div>
+                        <div class="skill-tag">Bootstrap</div>
+                        <div class="skill-tag">VS Code</div>
+                        <div class="skill-tag">RESTful APIs</div>
+                        <div class="skill-tag">Problem Solving</div>
+                        <div class="skill-tag">Communication</div>
+                        <div class="skill-tag">Express JS</div>
+                    </div>
+                </section>
+
+                <section id="contact">
+                    <form id="contact-form" class="space-y-4">
+                        <div>
+                            <label for="name" class="text-sm font-medium">Name</label>
+                            <input type="text" id="name" placeholder="Abhishek" class="w-full p-3 rounded-md mt-1 form-input">
+                        </div>
+                        <div>
+                            <label for="email" class="text-sm font-medium">Your email</label>
+                            <input type="email" id="email" placeholder="Abhish@example.com" class="w-full p-3 rounded-md mt-1 form-input">
+                        </div>
+                         <div>
+                            <div class="flex items-center gap-2">
+                                <label for="project" class="text-sm font-medium">About Project</label>
+                                <button type="button" id="about-project-ai-btn" class="ai-button text-indigo-500" title="✨ Help me write this">
+                                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                            <textarea id="project" rows="4" placeholder="I want to discuss new about..." class="w-full p-3 rounded-md mt-1 form-input"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gray-900 text-white p-3 rounded-md font-semibold hover:bg-gray-800">Send here</button>
+                    </form>
+                </section>
+            </main>
+        </div>
+        
+        <footer class="text-center mt-24 border-t pt-8">
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="text-gray-500 hover:text-gray-900">Twitter X</a>
+                <a href="#" class="text-gray-500 hover:text-gray-900">LinkedIn</a>
+                <a href="#" class="text-gray-500 hover:text-gray-900">Instagram</a>
+            </div>
+            <p class="text-sm text-gray-500 mt-4">Abhishek</p>
+        </footer>
+    </div>
+
+    <script type="module">
+        lucide.createIcons();
+
+        // --- Element References ---
+        const whatIDoBtn = document.getElementById('what-i-do-ai-btn');
+        const whatIDoContainer = document.getElementById('what-i-do-container');
+        const aboutProjectBtn = document.getElementById('about-project-ai-btn');
+        const projectTextarea = document.getElementById('project');
+        const contactForm = document.getElementById('contact-form');
+
+        // --- Contact Form to Gmail ---
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const project = document.getElementById('project').value;
+            
+            const subject = encodeURIComponent(`Project Inquiry from ${name}`);
+            const body = encodeURIComponent(`Hi Abhishek,\n\nMy name is ${name} and my email is ${email}.\n\nHere are the details about my project:\n\n${project}\n\nLooking forward to hearing from you.\n\nBest,\n${name}`);
+            
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=abhishekkumar84849@gmail.com&su=${subject}&body=${body}`;
+            
+            window.open(gmailUrl, '_blank');
+        });
+
+
+        // --- Core AI Functions ---
+        async function callGemini(prompt) {
+            const apiKey = ""; // Handled by environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ role: "user", parts: [{ text: prompt }] }],
+                generationConfig: {
+                    responseMimeType: "application/json",
+                }
+            };
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error(`API request failed with status ${response.status}`);
+            }
+
+            const result = await response.json();
+            if (result.candidates && result.candidates[0].content.parts[0].text) {
+                return JSON.parse(result.candidates[0].content.parts[0].text);
+            } else {
+                throw new Error('No content returned from AI.');
+            }
+        }
+
+        // --- "What I do?" AI Feature ---
+        whatIDoBtn.addEventListener('click', async () => {
+            const originalIcon = whatIDoBtn.innerHTML;
+            whatIDoBtn.innerHTML = `<div class="loader"></div>`;
+            whatIDoBtn.disabled = true;
+
+            const prompt = `
+                You are a creative copywriter for a developer's portfolio. 
+                Rewrite the following three service descriptions to be more engaging and professional.
+                Return the result as a JSON array of objects, where each object has a "title" and a "description" key.
+                
+                Original descriptions:
+                1. Title: "Web Development", Description: "Building responsive and performant websites from scratch using modern technologies."
+                2. Title: "UI & Product Design", Description: "Designing intuitive and user-friendly interfaces that are both beautiful and functional."
+                3. Title: "Full-Stack Solutions", Description: "Developing end-to-end applications, including database management and server-side logic."
+            `;
+
+            try {
+                const newDescriptions = await callGemini(prompt);
+                const notes = whatIDoContainer.querySelectorAll('.sticky-note');
+                
+                if (newDescriptions.length === notes.length) {
+                    notes.forEach((note, index) => {
+                        note.querySelector('h3').textContent = newDescriptions[index].title;
+                        note.querySelector('p').textContent = newDescriptions[index].description;
+                    });
+                }
+            } catch (error) {
+                console.error("Failed to rewrite descriptions:", error);
+                alert("Sorry, I couldn't rewrite the descriptions right now.");
+            } finally {
+                whatIDoBtn.innerHTML = originalIcon;
+                whatIDoBtn.disabled = false;
+                lucide.createIcons();
+            }
+        });
+
+        // --- "About Project" AI Feature ---
+        aboutProjectBtn.addEventListener('click', async () => {
+            const currentText = projectTextarea.value;
+            if (!currentText.trim()) {
+                alert("Please write a brief idea about your project first.");
+                return;
+            }
+
+            const originalIcon = aboutProjectBtn.innerHTML;
+            aboutProjectBtn.innerHTML = `<div class="loader w-4 h-4"></div>`;
+            aboutProjectBtn.disabled = true;
+
+            const prompt = `
+                You are a helpful assistant for a client contacting a developer.
+                A client has started writing a project inquiry. Your task is to expand their initial idea into a more professional and detailed message.
+                The client's initial idea is: "${currentText}"
+                
+                Expand this into a friendly but professional message. Mention the user's idea and ask some clarifying questions to help the developer understand the scope better.
+                Return the result as a JSON object with a single key "expanded_text".
+            `;
+
+            try {
+                const result = await callGemini(prompt);
+                projectTextarea.value = result.expanded_text;
+            } catch (error) {
+                console.error("Failed to expand project description:", error);
+                alert("Sorry, I couldn't help write the message right now.");
+            } finally {
+                aboutProjectBtn.innerHTML = originalIcon;
+                aboutProjectBtn.disabled = false;
+                lucide.createIcons();
+            }
+        });
+
+    </script>
+</body>
+</html>
